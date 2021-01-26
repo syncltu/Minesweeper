@@ -17,9 +17,6 @@ class Field extends React.Component{
             onContextMenu={this.props.onContextMenu}
             onMouseDown={this.props.onMouseDown}
             />
-
-
-           
         )
     }
     
