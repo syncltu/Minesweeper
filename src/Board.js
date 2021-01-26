@@ -13,10 +13,12 @@ class Board extends React.Component{
 
         this.state={
             fields:Array(9),
-            backGroundUrls:Array(9)
+            backGroundUrls:Array(9),
+            textValue:"Test"
         }
 
         this.setButtonPicture=this.setButtonPicture.bind(this);
+        this.renderRow=this.renderRow.bind(this);
     }
 
     handleLeftMouseClick(i){
@@ -52,34 +54,43 @@ class Board extends React.Component{
                 onClick={()=>this.handleLeftMouseClick(i)}
                 onContextMenu={()=>this.handleMiddleMouseClick(i)}
                 onMouseDown={()=>this.handleRightMouseClick(i)}
+                buttonText={i}
                 fieldPictureUrl={this.state.backGroundUrls[i]}
+                
             />
         );
     }
+    renderRow(membersInRow,fieldCounter){
+        var rowMembers=[];
+        let fieldNumber=fieldCounter;
+        for(var i=0;i<membersInRow;i++){
+            rowMembers.push(this.renderField(fieldNumber))
+            fieldNumber++;
+        }
+        return(
+            <div className="board-row" onContextMenu={(e)=>e.preventDefault()}>
+            {rowMembers}
+            </div>
+        )
+    }
+    renderBoard(columnCounter,rowCounter){
+        let counter=0;
+        var gameBoard=[];
+        for (var i=0;i<rowCounter;i++){
+            var renderedRow=this.renderRow(columnCounter,counter);
+            gameBoard.push(renderedRow);
 
+            counter+=rowCounter;
+        }
+        return gameBoard;
+
+    }
     render(){
         let status;
+        var test2=this.renderBoard(4,4);
         return(
-            
-            <div>
-                <div className="status">{status}</div>
-                <div className="board-row">
-                    {this.renderField(0)}
-                    {this.renderField(1)}
-                    {this.renderField(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderField(3)}
-                    {this.renderField(4)}
-                    {this.renderField(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderField(6)}
-                    {this.renderField(7)}
-                    {this.renderField(8)}
-                </div>
+            test2
 
-            </div>
         )
     }
 }

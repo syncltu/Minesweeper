@@ -16,7 +16,15 @@ class Field extends React.Component{
             onClick={this.props.onClick}
             onContextMenu={this.props.onContextMenu}
             onMouseDown={this.props.onMouseDown}
-            />
+            >
+
+                {this.props.buttonText}
+
+                
+            </button>
+
+          
+           
         )
     }
     
